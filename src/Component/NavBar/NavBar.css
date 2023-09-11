@@ -1,0 +1,20 @@
+.bg-image {
+	background-image: url(../../assets/images/6.jpg);
+	background-size: cover; /* Ensure the background image covers the entire element */
+	background-position: center; /* Center the background image within the element */
+	width: 100%;
+    height: 100vh;
+    z-index:1;
+}
+
+.bg-overlay::before {
+    content: "";
+    background: rgba(0, 0, 0, 0.5); /* Adjust the alpha (0.5) for the desired transparency */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    right: 0;
+    bottom: 0;
+}
+  
