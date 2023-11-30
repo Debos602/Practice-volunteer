@@ -22,7 +22,6 @@
 	right: 0;
 	bottom: 0;
 }
-
-ul.nav-resize li {
-	margin: 7px;
+.home-title h2 {
+	color: rgb(12, 4, 12);
 }
