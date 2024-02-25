@@ -34,6 +34,7 @@ const AuthProvider = ({ children }) => {
 		return signInWithEmailAndPassword(auth, email, password);
 	};
 	const logOut = () => {
+		localStorage.removeItem("volunteer-token");
 		return signOut(auth);
 	};
 

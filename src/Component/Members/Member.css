@@ -1,0 +1,6 @@
+.table tr.active,
+.table tr.active:nth-child(even),
+.table-zebra tbody tr:nth-child(even) {
+	--tw-bg-opacity: 1;
+	background-color: rgb(36 35 70);
+}

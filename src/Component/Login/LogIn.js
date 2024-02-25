@@ -18,8 +18,31 @@ const LogIn = () => {
 		try {
 			const result = await logIn(email, password);
 			const user = result.user;
+
+			const currentUser = {
+				email: user.email,
+			};
+
+			console.log(currentUser);
+
+			//get jwt token
+			fetch("https://practice-voluteer-server.vercel.app/jwt", {
+				method: "POST",
+				headers: {
+					"content-type": "application/json",
+				},
+				body: JSON.stringify(currentUser),
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					console.log(data);
+
+					localStorage.setItem("volunteer-token", data.token);
+					console.log(data.token);
+					navigate(from, { replace: true });
+				});
 			// console.log(user);
-			navigate(from, { replace: true });
+
 			form.reset();
 		} catch (error) {
 			console.error("Error during signin", error);
@@ -37,16 +60,16 @@ const LogIn = () => {
 	};
 
 	return (
-		<div className="hero bg-slate-400">
-			<div className="hero-content flex-col w-1/2 mt-16">
+		<div className="hero bg-indigo-950">
+			<div className="hero-content flex-col w-1/2 mt-28">
 				<div className="text-center lg:text-left">
-					<h1 className="text-5xl font-bold">Login now!</h1>
+					<h1 className="text-5xl text-white">Login now!</h1>
 				</div>
-				<div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 py-5 ">
-					<form onSubmit={handleLogIn} className="card-body">
+				<div className="card flex-shrink-0 w-full max-w-md shadow-2xl bg-indigo-900 opacity-2 ">
+					<form onSubmit={handleLogIn} className="card-body ">
 						<div className="form-control">
 							<label className="label">
-								<span className="label-text">Email</span>
+								<span className="label-text text-white">Email</span>
 							</label>
 							<input
 								name="email"
@@ -57,7 +80,7 @@ const LogIn = () => {
 						</div>
 						<div className="form-control">
 							<label className="label">
-								<span className="label-text">Password</span>
+								<span className="label-text text-white">Password</span>
 							</label>
 							<input
 								name="password"
@@ -66,33 +89,36 @@ const LogIn = () => {
 								className="input input-bordered"
 							/>
 							<label className="label">
-								<Link href="#" className="label-text-alt link link-hover">
+								<Link
+									href="#"
+									className="label-text-alt link link-hover text-white"
+								>
 									Forgot password?
 								</Link>
 							</label>
 						</div>
-						<div className="form-control mt-6">
-							<button className="btn btn-primary">Login</button>
+						<div className="form-control mt-4">
+							<button className="btn btn-primary text-white">Login</button>
+						</div>
+						<div className="text-center py-2">
+							<span>
+								Not Registered{" "}
+								<Link to="/signup" className="text-amber-700 font-bold text-xl">
+									Sign Up
+								</Link>
+							</span>
+							<br />
+							<p>
+								open with{" "}
+								<span
+									onClick={handleGoogleLogIn}
+									className="text-amber-700 font-bold text-xl"
+								>
+									Google
+								</span>
+							</p>
 						</div>
 					</form>
-					<div>
-						<p className="text-center">
-							Not Registered{" "}
-							<Link to="/signup" className="text-amber-700 font-bold text-xl">
-								Sign Up
-							</Link>
-						</p>
-						<br />
-						<p className="text-center">
-							open with{" "}
-							<span
-								onClick={handleGoogleLogIn}
-								className="text-amber-700 font-bold text-xl"
-							>
-								Google
-							</span>
-						</p>
-					</div>
 				</div>
 			</div>
 		</div>

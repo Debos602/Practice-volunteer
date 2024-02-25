@@ -1,0 +1,14 @@
+.pagination button {
+	background: #1e1b4b;
+	color: #fff;
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	line-height: 20px;
+	display: inline-block;
+	margin: 30px 5px;
+}
+.pagination .selected {
+	background-color: blueviolet;
+	color: #fff;
+}

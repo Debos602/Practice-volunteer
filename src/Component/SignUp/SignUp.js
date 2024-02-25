@@ -10,13 +10,15 @@ const SignUp = () => {
 		const form = event.target;
 		const name = form.name.value;
 		const email = form.email.value;
+		const date = form.date.value;
+		const description = form.description.value;
 		const password = form.password.value;
 
 		try {
 			const result = await createUser(email, password);
 			const user = result.user;
 			console.log(user);
-			await updateProfile(name);
+			await updateProfile(name, date, description);
 			await handleSignOut(); // Wait for the sign-out before resetting the form
 			form.reset();
 		} catch (error) {
@@ -28,9 +30,11 @@ const SignUp = () => {
 		event.preventDefault();
 	};
 
-	const updateProfile = async (name) => {
+	const updateProfile = async (name, date, description) => {
 		const profile = {
 			displayName: name,
+			date: date,
+			description: description,
 		};
 		try {
 			const data = await updateUserData(profile);
@@ -53,12 +57,12 @@ const SignUp = () => {
 		}
 	};
 	return (
-		<div className="hero bg-slate-400 ">
-			<div className="hero-content flex-col w-1/2 mt-20">
+		<div className="hero bg-indigo-950 ">
+			<div className="hero-content flex-col w-1/2 my-36">
 				<div className="text-center lg:text-left">
-					<h1 className="text-5xl font-bold">Sign Up</h1>
+					<h1 className="text-5xl text-white font-bold">Sign Up</h1>
 				</div>
-				<div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 py-5">
+				<div className="card flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100 py-5">
 					<form onSubmit={handleCreateUser} className="card-body">
 						<div className="form-control">
 							<label className="label">
@@ -68,7 +72,7 @@ const SignUp = () => {
 								onBlur={handleOnBlur}
 								type="text"
 								name="name"
-								placeholder="First Name"
+								placeholder="Name"
 								className="input input-bordered"
 							/>
 						</div>
@@ -81,6 +85,31 @@ const SignUp = () => {
 								type="email"
 								name="email"
 								placeholder="email"
+								className="input input-bordered"
+							/>
+						</div>
+
+						<div className="form-control">
+							<label className="label">
+								<span className="label-text">Date</span>
+							</label>
+							<input
+								onBlur={handleOnBlur}
+								type="date"
+								name="date"
+								placeholder="date"
+								className="input input-bordered"
+							/>
+						</div>
+						<div className="form-control">
+							<label className="label">
+								<span className="label-text">Description</span>
+							</label>
+							<input
+								onBlur={handleOnBlur}
+								type="text"
+								name="description"
+								placeholder="Description"
 								className="input input-bordered"
 							/>
 						</div>
@@ -99,15 +128,13 @@ const SignUp = () => {
 						<div className="form-control mt-6">
 							<button className="btn btn-primary">Registration</button>
 						</div>
-					</form>
-					<div>
 						<p className="text-center">
 							Go to{" "}
 							<Link to="/login" className="text-amber-700 font-bold text-xl">
 								login
 							</Link>
 						</p>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>

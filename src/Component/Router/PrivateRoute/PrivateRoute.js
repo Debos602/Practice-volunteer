@@ -7,7 +7,11 @@ const PrivateRoute = ({ children }) => {
 	const location = useLocation();
 
 	if (loading) {
-		return <h1 className="text-5xl">Loading....</h1>;
+		return (
+			<h1 className="text-5xl text-center py-36 bg-indigo-950 min-h-screen text-white">
+				Loading....
+			</h1>
+		);
 	}
 
 	if (user && user.uid) {

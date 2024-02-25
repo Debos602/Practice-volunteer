@@ -6,6 +6,8 @@ import SignUp from "../SignUp/SignUp";
 import Services from "../Services/Services";
 import Members from "../Members/Members";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import Collection from "../Collection/Collection";
+import Userlist from "../UserList/Userlist";
 
 export const router = createBrowserRouter([
 	{
@@ -16,13 +18,18 @@ export const router = createBrowserRouter([
 				path: "/",
 				element: <Home></Home>,
 			},
+			// {
+			// 	path: "/cards",
+			// 	loader: () => fetch(`https://practice-voluteer-server.vercel.app/services`),
+			// 	element: <Cards></Cards>,
+			// },
 			{
 				path: "/services/:id",
 				loader: ({ params }) =>
-					fetch(`http://localhost:5000/services/${params.id}`),
+					fetch(`https://practice-voluteer-server.vercel.app/services/${params.id}`),
 				element: (
 					<PrivateRoute>
-						<Services></Services>
+						<Services className="bg-teal-900"></Services>
 					</PrivateRoute>
 				),
 			},
@@ -34,9 +41,22 @@ export const router = createBrowserRouter([
 				path: "/signup",
 				element: <SignUp></SignUp>,
 			},
+
+			{
+				path: "/userlist",
+				element: <Userlist></Userlist>,
+			},
+			{
+				path: "/collection",
+				element: <Collection></Collection>,
+			},
 			{
 				path: "/members",
-				element: <Members></Members>,
+				element: (
+					<PrivateRoute>
+						<Members></Members>
+					</PrivateRoute>
+				),
 			},
 		],
 	},
